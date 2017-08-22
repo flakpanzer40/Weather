@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	Check a city's weather!
+	<title>Worldwide City Weather</title>
+	<script src="https://code.jquery.com/jquery-3.1.0.min.js" integrity="sha256-cCueBR6CsyA4/9szpPfrX3s49M9vUU5BgtiJj06wt/s=" crossorigin="anonymous"></script>
+	<script type="text/javascript">
+	function FtoC(temp){
+	temp -=32;
+	temp/=1.8;
+	temp = Math.floor(temp);
+	return temp;
+	}
+		$(document).ready(function(){
+			$('form').submit(function(){
+				var location = ($('input').val());
+				$.get("http://api.openweathermap.org/data/2.5/weather?q=" + location + "&units=imperial&appid=8d56f00c3bc09bd96eb0bb09eeee4e83", function(data) {
+					
+					$('#result').append('<h1>'+ data.name+'</h1><p>' +"Temperature: "+ FtoC(data.main.temp) +" Celsius"+'</p>' + 
+					"Minimum Temperature: "+FtoC(data.main.temp_min) +" Celsius"+'</p>'+ "Maximum Temperature: "+FtoC(data.main.temp_max)+" Celsius"+'</p>');
+				}, 'json');
+				return false;
+			})
+		});
+	</script>
+</head>
+<body>
+	<form action="" method="get">
+		<input type="text" name="weather" placeholder="Enter city here">
+		<button>Get Weather</button>
+	</form>
+	<div id="result"></div>
+</body>
+</html>
+
+
+
+  
+ 
+ 
